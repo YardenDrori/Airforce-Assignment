@@ -1,8 +1,9 @@
+import './Header.css'
+
 function Header(){
     return(
         <div className="Header">
-            <h1 className='Title'>Flight Info name in progress lol</h1>
-            <p className='Line1'>line2</p>
+            <h1 className='Title'>Flight Monitor </h1>
         </div>
     );
 }

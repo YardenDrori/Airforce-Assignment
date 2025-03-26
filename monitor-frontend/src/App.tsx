@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header';
-import Button from './components/Button';
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Header/>
-        <Button/>
+        <Dashboard/>
       </header>
     </div>
   );
