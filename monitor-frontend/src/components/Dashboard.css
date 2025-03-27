@@ -4,17 +4,17 @@
     padding: 0.25em 0.8em;
     transition: transform 0.1s ease-in-out;
     border-color: black;
-    border-width: 0.5rem;
+    border-width: 0.5EM;
     border-style:outset;
     border-radius: 0.75em;
 }
 .Button:hover {
-    color: rgb(0, 225, 255);
+    color: rgb(146, 242, 255);
     transform: scale(1.2);
     transition: transform 0.1s ease-in-out;
 }
 .Button:active {
-    color: rgb(0, 187, 255);
+    color: rgb(70, 206, 255);
     border-style:groove
 }
 .Buttons {
@@ -29,12 +29,12 @@
 }
 
 .data-box-text {
-    padding: 1rem;
-    border-width: 0.3rem;
+    padding: 1EM;
+    border-width: 0.3EM;
     border-color: rgb(86, 0, 0);
     border-style: solid;
     background-color: rgb(72, 72, 72);
-    border-radius: 2rem;
+    border-radius: 2EM;
 }
 
 .data-box-plus{
@@ -43,17 +43,17 @@
     font-size: 16px;
     color: #333;
     background-color: rgb(202, 202, 202);
-    padding: 1rem;
-    margin: 0.1rem;  
+    padding: 1EM;
+    margin: 0.1EM;  
     border-color: black;
-    border-width: 0.2rem;
+    border-width: 0.2EM;
     border-style:solid;
     border-radius: 0.75em;
   }
 
 .arrow-button {
   background-color: rgb(0, 200, 0);
-  padding: 1rem;
+  padding: 1EM;
   color: white;
   border: none;
 
@@ -68,3 +68,131 @@
 .arrow-button:active {
     background-color: rgb(0, 141, 0);
 }
+
+
+
+.altitude-bar {
+    width: 20EM;
+    height: 10EM;
+    margin-left: 1.5em;
+    position: relative;
+  }
+  
+  .test {
+    display: flex;
+    flex-direction: column-reverse;
+    
+  }
+  .vertical-bar {
+    position: relative; /* Make it a positioning context */
+    display: flex;
+    width: 4em;
+    height: 10em;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-radius: 0.5EM;
+  }
+  
+  .filled-bar-area {
+    background-color: #00ff00;
+    width: 100%;
+    height: 25%;
+    transition: height 0.3s ease-in-out;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+  }
+
+  .arrow-indicater {
+    position: absolute;
+    left: 2.2EM; /* adjust so it lines up horizontally with the bar */
+    top: 19.5EM;
+    scale: 3;
+    width: 12%;
+    height: 1EM;
+    background-color: rgb(0, 187, 255);
+    clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
+    transition: top 0.3s ease-in-out;
+    z-index: 2;
+  }
+
+  .measurement-indicators {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2; /* above the green bar */
+  }
+  .measurement-indicator {
+    color: rgb(255, 0, 0);
+    font-size: 1.3EM;
+    text-align: center;
+  }
+
+  .compass{
+    position: relative;
+    left: 7em;
+    bottom: 8em;
+  }
+
+  .compass-circle {
+    position: absolute;
+    width: 10em;
+    height: 10em;
+    background-color: white;
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  .circle-center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .compass-stationary-needle{
+    position: relative;
+    width: 8em;
+    height: 5em;
+    bottom: 1.5em;
+    transform: rotate(-90deg);
+    background-color: rgb(255, 174, 0);
+    clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
+  }
+
+  .degree-measurements{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+
+  .degree-measurenent {
+    color: #000000;
+    font-size: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  #north {
+    position: absolute;
+    top: -4em;
+  }
+  #east {
+    position: absolute;
+    left: 4em;
+  }
+  #south {
+    position: absolute;
+    top: 4em;
+  }
+  #west {
+    position: absolute;
+    left: -4em;
+  }
