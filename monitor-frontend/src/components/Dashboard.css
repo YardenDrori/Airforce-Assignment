@@ -69,130 +69,158 @@
     background-color: rgb(0, 141, 0);
 }
 
-
+.visual-data {
+  display: flex;
+  position: relative;
+  height:fit-content;
+  width: fit-content;
+  left: 50%;
+  top: 10em;
+  transform: translate(-50%, -50%);
+  /* transform-origin: center center; */
+  gap: 3em;
+}
 
 .altitude-bar {
-    width: 20EM;
-    height: 10EM;
-    margin-left: 1.5em;
-    position: relative;
-  }
+  position: relative;
+  width: 4EM;
+  height: 30rem;
+  bottom: 3em;
+}
   
-  .test {
-    display: flex;
-    flex-direction: column-reverse;
-    
-  }
-  .vertical-bar {
-    position: relative; /* Make it a positioning context */
-    display: flex;
-    width: 4em;
-    height: 10em;
-    background-color: #ffffff;
-    overflow: hidden;
-    border-radius: 0.5EM;
-  }
-  
-  .filled-bar-area {
-    background-color: #00ff00;
-    width: 100%;
-    height: 25%;
-    transition: height 0.3s ease-in-out;
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    left: 0;
-  }
 
-  .arrow-indicater {
-    position: absolute;
-    left: 2.2EM; /* adjust so it lines up horizontally with the bar */
-    top: 19.5EM;
-    scale: 3;
-    width: 12%;
-    height: 1EM;
-    background-color: rgb(0, 187, 255);
-    clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
-    transition: top 0.3s ease-in-out;
-    z-index: 2;
-  }
+.vertical-bar {
+  position: absolute;
+  display: flex;
+  width: 4em;
+  height: 10em;
+  background-color: #ffffff;
+  overflow: hidden;
+  border-radius: 0.5EM;
+}
 
-  .measurement-indicators {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 2; /* above the green bar */
-  }
-  .measurement-indicator {
-    color: rgb(255, 0, 0);
-    font-size: 1.3EM;
-    text-align: center;
-  }
+.filled-bar-area {
+  background-color: #00ff00;
+  width: 100%;
+  height: 25%;
+  transition: height 0.3s ease-in-out;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+}
 
-  .compass{
-    position: relative;
-    left: 7em;
-    bottom: 8em;
-  }
+.arrow-indicater {
+  position: absolute;
+  left: 2.2EM; /* adjust so it lines up horizontally with the bar */
+  top: 19.5EM;
+  scale: 3;
+  width: 3em;
+  height: 1EM;
+  background-color: rgb(0, 187, 255);
+  clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
+  transition: top 0.3s ease-in-out;
+  z-index: 2;
+}
 
-  .compass-circle {
-    position: absolute;
-    width: 10em;
-    height: 10em;
-    background-color: white;
-    clip-path: circle(50% at 50% 50%);
-  }
+.measurement-indicators {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2; /* above the green bar */
+}
+.measurement-indicator {
+  color: rgb(255, 0, 0);
+  font-size: 1.3EM;
+  text-align: center;
+}
 
-  .circle-center{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .compass-stationary-needle{
-    position: relative;
-    width: 8em;
-    height: 5em;
-    bottom: 1.5em;
-    transform: rotate(-90deg);
-    background-color: rgb(255, 174, 0);
-    clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
-  }
+.compass{
+  position: relative;
+  width: 10EM;
+  height: 10EM;
+}
 
-  .degree-measurements{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-  }
+.circle {
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  background-color: white;
+  clip-path: circle(50% at 50% 50%);
+}
 
-  .degree-measurenent {
-    color: #000000;
-    font-size: 1em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
+.circle-center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.compass-stationary-needle{
+  position: relative;
+  width: 8em;
+  height: 5em;
+  bottom: 1.5em;
+  transform: rotate(-90deg);
+  background-color: rgb(255, 174, 0);
+  clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
+}
 
-  #north {
-    position: absolute;
-    top: -4em;
-  }
-  #east {
-    position: absolute;
-    left: 4em;
-  }
-  #south {
-    position: absolute;
-    top: 4em;
-  }
-  #west {
-    position: absolute;
-    left: -4em;
-  }
+.degree-measurements{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+
+.degree-measurenent {
+  color: #000000;
+  font-size: 1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center; /* 👈 this centers the rotation */
+  text-align: center;
+}
+
+#north {
+  position: absolute;
+  top: -4em;
+}
+#east {
+  position: absolute;
+  left: 4em;
+}
+#south {
+  position: absolute;
+  top: 4em;
+}
+#west {
+  position: absolute;
+  left: -4em;
+}
+
+.angle-indicator {
+  position: relative;
+  width: 10EM;
+  height: 10EM;
+}
+
+.angle-indicator-sky {
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  bottom: 5em;
+  background-color: rgb(0, 166, 255);
+}
+.angle-indicator-ground {
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  top: 5em;
+  background-color: #00ff00;
+}

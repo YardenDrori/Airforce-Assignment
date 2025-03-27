@@ -2,7 +2,8 @@ import React, { useState, ReactElement } from 'react';
 import './Dashboard.css';
 const max_altitude = 3000;
 const altitude_bar_visual_height = 30;
-const filled = 1500; /*temp untill backend is set up*/
+const filled = 2750; /*temp untill backend is set up*/
+const angle = -50; /*temp untill backend is set up*/
 
 
 function Dashboard() {
@@ -25,6 +26,7 @@ function Dashboard() {
 
 
     } else if (buttonId === 'visual') {
+      const skyOffset = (angle/100*5)
       setContent(
         <div className='visual-data'>
           <div className='altitude-bar'>
@@ -42,22 +44,22 @@ function Dashboard() {
             </div>
           </div>
           <div className='compass'>
-            <div className='compass-circle'>
+            <div className='circle'>
               <div className='circle-center'>
-                <div className='degree-measurements' style={{ transform: `rotate(${rotation}deg)` }}>
-                  <label className='degree-measurenent' id='north' style={{ transform: `rotate(${-rotation}deg)` }}>0</label>
-                </div>  
-                <div className='degree-measurements' style={{ transform: `rotate(${rotation}deg)` }}>
-                  <label className='degree-measurenent' id='east' style={{ transform: `rotate(${-rotation}deg)` }}>90</label>
+              <div className='compass-stationary-needle'></div>
+              <div className='degree-measurements' style={{ transform: `rotate(-${rotation}deg)` }}>
+                  <label className='degree-measurenent' id='north' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>0</label>
+                  <label className='degree-measurenent' id='east' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>90</label>
+                  <label className='degree-measurenent' id='south' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>180</label>
+                  <label className='degree-measurenent' id='west' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>270</label>
                 </div>
-                <div className='degree-measurements' style={{ transform: `rotate(${rotation}deg)` }}>
-                  <label className='degree-measurenent' id='south' style={{ transform: `rotate(${-rotation}deg)` }}>180</label>
-                </div>
-                <div className='degree-measurements' style={{ transform: `rotate(${rotation}deg)` }}>
-                  <label className='degree-measurenent' id='west' style={{ transform: `rotate(${-rotation}deg)` }}>270</label>
-                </div>
-                <div className='compass-stationary-needle'></div>
               </div>
+            </div>
+          </div>
+          <div className='angle-indicator'>
+            <div className='circle'>
+              <div className='angle-indicator-sky' style={{bottom: 5-skyOffset + 'em'}}></div>
+              <div className='angle-indicator-ground' style={{top: 5+skyOffset + 'em'}}></div>
             </div>
           </div>
         </div>
