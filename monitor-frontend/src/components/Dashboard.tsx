@@ -9,6 +9,7 @@ const angle = -50; /*temp untill backend is set up*/
 function Dashboard() {
   const [content, setContent] = useState<ReactElement | null>(null);
   const [rotation, setRotation] = useState(45);
+  const [showPopover, setShowPopover] = useState(false);
 
   function handleClick(buttonId: string) {
     console.log('Button clicked: ', buttonId);
@@ -67,16 +68,8 @@ function Dashboard() {
       );
       setRotation(rotation);
   } else if (buttonId === 'plus') {
-      setContent(
-      <div className='data-boxes'>
-        <div>
-          <input className='data-box-plus' type='text' placeholder='Altitude' />
-          <input className='data-box-plus' type='text' placeholder='HIS' />
-          <input className='data-box-plus' type='text' placeholder='ADI' />
-        </div>
-        <button className='arrow-button' id='submit-button' onClick={() => handleClick('submit')}>SEND</button>
-      </div>
-    );
+    console.log('Button clicked: ', buttonId);
+    setShowPopover(!showPopover);
     } else {
       console.log('ERROR: unknown buttonID');
     }
@@ -84,14 +77,28 @@ function Dashboard() {
 
   return (
     <div className='main-body'>
-      <div className='Buttons'>
-        <button className='Button' onClick={() => handleClick('text')}>TEXT</button>
-        <button className='Button' onClick={() => handleClick('visual')}>VISUAL</button>
-        <button className='Button' onClick={() => handleClick('plus')}>+</button>
+      <div className='buttons'>
+        <div className='primary-buttons'>
+          <button className='button' onClick={() => handleClick('text')}>TEXT</button>
+          <button className='button' onClick={() => handleClick('visual')}>VISUAL</button>
+        </div>
+        <button className='button' id='plus-button' onClick={() => handleClick('plus')}>+</button>
       </div>
       <div className='content'>
         {content}
       </div>
+      {showPopover && (
+        <div className="plus-popover">
+          <div className='data-boxes'>
+              <input className='data-box-plus' type='text' placeholder='Altitude' />
+              <input className='data-box-plus' type='text' placeholder='HIS' />
+              <input className='data-box-plus' type='text' placeholder='ADI' />
+          </div>
+          <button className='arrow-button' id='submit-button' onClick={() => handleClick('submit')}>
+              SEND
+          </button>
+        </div>
+      )}
     </div>
   );
 }

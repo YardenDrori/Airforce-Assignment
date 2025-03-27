@@ -1,4 +1,17 @@
-.Button {
+.main-body {
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  border-color: rgb(181, 181, 181);
+  border-width: 0.1em;
+  border-style: solid;
+  padding: 0.3em;
+  background-color: #353535;
+  border-width: 0.1em;
+  padding: 0.9em;
+}
+
+.button {
     color: white;
     background-color: rgb(72, 72, 72);
     padding: 0.25em 0.8em;
@@ -8,48 +21,83 @@
     border-style:outset;
     border-radius: 0.75em;
 }
-.Button:hover {
+.button:hover {
     color: rgb(146, 242, 255);
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: transform 0.1s ease-in-out;
 }
-.Button:active {
+.button:active {
     color: rgb(70, 206, 255);
     border-style:groove
 }
-.Buttons {
-    display: inline-flex;
-    gap: 1em;
-    padding-bottom: 2em;
+.primary-buttons {
+  align-items:center;
+  justify-items: center;
+  display:flex;
+  gap:0.5em;
+}
+.buttons {
+  position: relative;
+  justify-content: center;
+  display: flex;
+  gap: 2em;
+  padding-bottom: 0.6em;
+  padding-top: 0.6em;
 }
 
+
+
 .data-boxes {
-    display:inline-flex;
-    gap: 1em;
+    display:flex;
+    flex-direction: column;
+    gap: 2em;
 }
 
 .data-box-text {
-    padding: 1EM;
-    border-width: 0.3EM;
-    border-color: rgb(86, 0, 0);
-    border-style: solid;
-    background-color: rgb(72, 72, 72);
-    border-radius: 2EM;
+
+  padding: 1EM;
+  border-width: 0.2em;
+  border-color: rgb(25, 25, 25);
+  border-style: solid;
+  background-color: rgb(72, 72, 72);
+  border-radius: 2EM;
 }
 
+
 .data-box-plus{
-    width: 200px;
-    height: 30px;
-    font-size: 16px;
-    color: #333;
-    background-color: rgb(202, 202, 202);
-    padding: 1EM;
-    margin: 0.1EM;  
-    border-color: black;
-    border-width: 0.2EM;
-    border-style:solid;
-    border-radius: 0.75em;
-  }
+  display: flex;
+  flex-direction: row;
+  width: 7.5em;
+  height: 3em;
+  display: flex;
+  font-size: 16px;
+  color: #333;
+  background-color: rgb(202, 202, 202);
+  padding: 1EM;
+  margin: 0.1EM;  
+  border-color: black;
+  border-width: 0.2EM;
+  border-style:solid;
+  border-radius: 0.75em;
+}
+
+.plus-popover {
+  height: 12.5em;
+  width: 25em;
+  position: absolute;
+  top: 67.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+
+  padding: 1em;
+  border-radius: 3em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* optional glass border */
+}
 
 .arrow-button {
   background-color: rgb(0, 200, 0);
@@ -72,11 +120,7 @@
 .visual-data {
   display: flex;
   position: relative;
-  height:fit-content;
-  width: fit-content;
-  left: 50%;
-  top: 10em;
-  transform: translate(-50%, -50%);
+  align-items: center;
   /* transform-origin: center center; */
   gap: 3em;
 }
@@ -85,7 +129,6 @@
   position: relative;
   width: 4EM;
   height: 30rem;
-  bottom: 3em;
 }
   
 
@@ -117,7 +160,7 @@
   scale: 3;
   width: 3em;
   height: 1EM;
-  background-color: rgb(0, 187, 255);
+  background-color: rgb(255, 100, 100);
   clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
   transition: top 0.3s ease-in-out;
   z-index: 2;
@@ -145,11 +188,13 @@
 }
 
 .circle {
+  display: grid;
   position: absolute;
   width: 10em;
   height: 10em;
   background-color: white;
   clip-path: circle(50% at 50% 50%);
+  
 }
 
 .circle-center{
@@ -164,7 +209,7 @@
   height: 5em;
   bottom: 1.5em;
   transform: rotate(-90deg);
-  background-color: rgb(255, 174, 0);
+  background-color: rgb(100, 0, 0);
   clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
 }
 
