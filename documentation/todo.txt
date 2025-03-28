@@ -1,3 +1,4 @@
-make visual compass animation
-fix visual rendering
 make scaling better
+make phone version
+add light mode
+add minecraft style animation to popover (maybe)

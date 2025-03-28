@@ -12,7 +12,6 @@ function Dashboard() {
   const [adi_visual, setADIVisual] = useState(50);
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
-  const primary_button = useRef<HTMLDivElement>(null);
   const [activeButton, setActiveButton] = useState('');
   const [altitude, setAltitude] = useState('');
   const [hsi, setHsi] = useState('');
@@ -86,7 +85,7 @@ function Dashboard() {
 
   function handleClickOutside(event: MouseEvent) {
     console.log('found mouse click');
-    if (popoverRef.current && !popoverRef.current.contains(event.target as Node) && !primary_button.current?.contains(event.target as Node)) {
+    if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
       setShowPopover(false);
     }
   }
@@ -166,7 +165,7 @@ function Dashboard() {
   return (
     <div className='main-body'>
       <div className='button-wrapper'>
-        <div className='primary-buttons' ref={primary_button}>
+        <div className='primary-buttons'>
           <button className='button' onClick={() => handleClick('text')}>TEXT</button>
           <button className='button' onClick={() => handleClick('visual')}>VISUAL</button>
         </div>
