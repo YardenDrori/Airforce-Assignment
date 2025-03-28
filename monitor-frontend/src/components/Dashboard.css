@@ -259,13 +259,14 @@
   position: absolute;
   width: 10em;
   height: 10em;
-  bottom: 5em;
+  bottom: 10em;
   background-color: rgb(0, 166, 255);
+  z-index: 1;
 }
 .angle-indicator-ground {
   position: absolute;
   width: 10em;
   height: 10em;
-  top: 5em;
+  top: 0em;
   background-color: #00ff00;
 }

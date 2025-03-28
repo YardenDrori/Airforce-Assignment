@@ -3,7 +3,7 @@ import './Dashboard.css';
 const max_altitude = 3000;
 const altitude_bar_visual_height = 30;
 const filled = 2750; /*temp untill backend is set up*/
-const angle = -50; /*temp untill backend is set up*/
+const angle = 100; /*temp untill backend is set up*/
 
 
 function Dashboard() {
@@ -27,7 +27,7 @@ function Dashboard() {
 
 
     } else if (buttonId === 'visual') {
-      const skyOffset = (angle/100*5)
+      const skyOffset = (angle/100*10)-5
       setContent(
         <div className='visual-data'>
           <div className='altitude-bar'>
@@ -60,7 +60,7 @@ function Dashboard() {
           <div className='angle-indicator'>
             <div className='circle'>
               <div className='angle-indicator-sky' style={{bottom: 5-skyOffset + 'em'}}></div>
-              <div className='angle-indicator-ground' style={{top: 5+skyOffset + 'em'}}></div>
+              <div className='angle-indicator-ground'></div>
             </div>
           </div>
         </div>
