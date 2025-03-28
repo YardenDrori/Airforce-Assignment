@@ -2,17 +2,68 @@ import React, { useState, ReactElement, useRef, useEffect} from 'react';
 import './Dashboard.css';
 const max_altitude = 3000;
 const altitude_bar_visual_height = 30;
-const filled = 2750; /*temp untill backend is set up*/
-const angle = 75; /*temp untill backend is set up*/
+
 
 
 function Dashboard() {
   const [content, setContent] = useState<ReactElement | null>(null);
-  const [rotation, setRotation] = useState(45);
+  const [altitude_visual, setAltitudeVisual] = useState(1500);
+  const [hsi_visual, setHSIVisual] = useState(45);
+  const [adi_visual, setADIVisual] = useState(30);
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const primary_button = useRef<HTMLDivElement>(null);
   const [activeButton, setActiveButton] = useState('');
+  const [altitude, setAltitude] = useState('');
+  const [hsi, setHsi] = useState('');
+  const [adi, setAdi] = useState('');
+  const data = {
+    altitude: Number(altitude),
+    hsi: Number(hsi),
+    adi: Number(adi),
+  };
+
+  function renderVisual() {
+    const skyOffset = (adi_visual/100*10)-5
+    return (
+      <div className='visual-data'>
+          <div className='altitude-bar'>
+            <div className='arrow-indicater' style={{ top: altitude_bar_visual_height-altitude_visual / max_altitude*altitude_bar_visual_height-1+ `rem`}}></div>
+            <div className='vertical-bar' style={{ height: altitude_bar_visual_height + `rem` }}>
+              <div
+                className='filled-bar-area'style={{height: (altitude_visual / max_altitude) * altitude_bar_visual_height + 'rem'}}
+              ></div>
+              <div className="measurement-indicators">
+                <div className="measurement-indicator">{max_altitude}</div>
+                <div className="measurement-indicator">{(2 * max_altitude) / 3}</div>
+                <div className="measurement-indicator">{max_altitude / 3}</div>
+                <div className="measurement-indicator">0</div>
+              </div>
+            </div>
+          </div>
+          <div className='compass'>
+            <div className='circle'>
+              <div className='circle-center'>
+              <div className='compass-stationary-needle'></div>
+              <div className='degree-measurements' style={{ transform: `rotate(-${hsi_visual}deg)` }}>
+                  <label className='degree-measurenent' id='north' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>0</label>
+                  <label className='degree-measurenent' id='east' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>90</label>
+                  <label className='degree-measurenent' id='south' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>180</label>
+                  <label className='degree-measurenent' id='west' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>270</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='angle-indicator'>
+            <div className='circle'>
+              <div className='angle-indicator-sky' style={{bottom: 5-skyOffset + 'em'}}></div>
+              <div className='angle-indicator-ground'></div>
+            </div>
+          </div>
+        </div>
+    )
+  }
+  
 
   function handleClickOutside(event: MouseEvent) {
     console.log('found mouse click');
@@ -31,6 +82,11 @@ function Dashboard() {
     };
   }, [showPopover]);
 
+
+  useEffect(() => {
+    setContent(renderVisual);
+  }, [altitude_visual, adi_visual, hsi_visual]);
+
   function handleClick(buttonId: string) {
     console.log('Button clicked: ', buttonId);
       
@@ -43,9 +99,9 @@ function Dashboard() {
       setActiveButton('text');
       setContent(
       <div className='data-boxes'>
-        <div className='data-box-text'>Altitude: [value]</div>
-        <div className='data-box-text'>HIS: [value]</div>
-        <div className='data-box-text'>ADI: [value]</div>
+        <div className='data-box-text'>Altitude: {altitude_visual}</div>
+        <div className='data-box-text'>HIS: {hsi_visual}</div>
+        <div className='data-box-text'>ADI: {adi_visual}</div>
       </div>
     );
 
@@ -53,57 +109,36 @@ function Dashboard() {
 
 
     } else if (buttonId === 'visual') {
-      const skyOffset = (angle/100*10)-5
       if (activeButton === 'visual') {
         setActiveButton('');
         setContent(null);
         return;
       }
       setActiveButton('visual');
-      setRotation(35);
-      setContent(
-        <div className='visual-data'>
-          <div className='altitude-bar'>
-            <div className='arrow-indicater' style={{ top: altitude_bar_visual_height-filled / max_altitude*altitude_bar_visual_height-1+ `rem`}}></div>
-            <div className='vertical-bar' style={{ height: altitude_bar_visual_height + `rem` }}>
-              <div
-                className='filled-bar-area'style={{height: (filled / max_altitude) * altitude_bar_visual_height + 'rem'}}
-              ></div>
-              <div className="measurement-indicators">
-                <div className="measurement-indicator">{max_altitude}</div>
-                <div className="measurement-indicator">{(2 * max_altitude) / 3}</div>
-                <div className="measurement-indicator">{max_altitude / 3}</div>
-                <div className="measurement-indicator">0</div>
-              </div>
-            </div>
-          </div>
-          <div className='compass'>
-            <div className='circle'>
-              <div className='circle-center'>
-              <div className='compass-stationary-needle'></div>
-              <div className='degree-measurements' style={{ transform: `rotate(-${rotation}deg)` }}>
-                  <label className='degree-measurenent' id='north' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>0</label>
-                  <label className='degree-measurenent' id='east' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>90</label>
-                  <label className='degree-measurenent' id='south' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>180</label>
-                  <label className='degree-measurenent' id='west' style={{transform: `translate(-50%, -50%) rotate(${rotation}deg)`}}>270</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='angle-indicator'>
-            <div className='circle'>
-              <div className='angle-indicator-sky' style={{bottom: 5-skyOffset + 'em'}}></div>
-              <div className='angle-indicator-ground'></div>
-            </div>
-          </div>
-        </div>
-        
-      );
+      setContent(renderVisual);
+
   } else if (buttonId === 'plus') {
     setShowPopover(!showPopover);
     } else if (buttonId === 'submit') {
+      fetch('http://localhost:3000/api/data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      setAltitudeVisual(Number(altitude));
+      setHSIVisual(Number(hsi));
+      setADIVisual(Number(adi));
+
+      if (activeButton === 'visual') {
+        setContent(renderVisual());
+      }
+
+      setAltitude('');
+      setHsi('');
+      setAdi('');
       console.log('Button clicked: ', buttonId);
       setShowPopover(!showPopover);
+
     } else {
       console.log('ERROR: unknown buttonID');
     }
@@ -127,9 +162,9 @@ function Dashboard() {
         <div className='add-data-popover' ref={popoverRef}>
           <div className='data-popover-center'>
             <div className='data-boxes' id='data-boxes-input'>
-                <input className='data-box-input' type='text' placeholder='Altitude' />
-                <input className='data-box-input' type='text' placeholder='HIS' />
-                <input className='data-box-input' type='text' placeholder='ADI' />
+              <input className='data-box-input' type='text' placeholder='Altitude' value={altitude} onChange={(e) => setAltitude(e.target.value)}/>
+              <input className='data-box-input' type='text' placeholder='HIS' value={hsi} onChange={(e) => setHsi(e.target.value)}/>
+              <input className='data-box-input' type='text' placeholder='ADI' value={adi} onChange={(e) => setAdi(e.target.value)}/>
             </div>
             <button className='button' id='submit-button' onClick={() => handleClick('submit')}>SEND</button>
           </div>
