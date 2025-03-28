@@ -7,9 +7,9 @@ const altitude_bar_visual_height = 30;
 
 function Dashboard() {
   const [content, setContent] = useState<ReactElement | null>(null);
-  const [altitude_visual, setAltitudeVisual] = useState(1500);
-  const [hsi_visual, setHSIVisual] = useState(45);
-  const [adi_visual, setADIVisual] = useState(30);
+  const [altitude_visual, setAltitudeVisual] = useState(0);
+  const [hsi_visual, setHSIVisual] = useState(0);
+  const [adi_visual, setADIVisual] = useState(50);
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const primary_button = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ function Dashboard() {
   };
 
   function renderVisual() {
-    const skyOffset = (adi_visual/100*10)-5
+    const skyOffset = (adi_visual/10)
     return (
       <div className='visual-data'>
           <div className='altitude-bar'>
@@ -56,7 +56,7 @@ function Dashboard() {
           </div>
           <div className='angle-indicator'>
             <div className='circle'>
-              <div className='angle-indicator-sky' style={{bottom: 5-skyOffset + 'em'}}></div>
+              <div className='angle-indicator-sky' style={{bottom: skyOffset + 'em'}}></div>
               <div className='angle-indicator-ground'></div>
             </div>
           </div>
@@ -64,6 +64,25 @@ function Dashboard() {
     )
   }
   
+  function handleValidInput(e: React.ChangeEvent<HTMLInputElement>,min : number,max : number,setState: React.Dispatch<React.SetStateAction<string>>){
+    const value = e.target.value;
+    
+    if (value === ""){
+      setState('')
+    }
+    if (!/^\d*$/.test(value)) {
+      return;
+    }
+    
+    const numValue = Number(value);
+    if (numValue >= min && numValue <= max) {
+      setState(value)
+    }
+    if (numValue < min)
+      setState(String(min));
+    if (numValue > max)
+      setState(String(max));
+  }
 
   function handleClickOutside(event: MouseEvent) {
     console.log('found mouse click');
@@ -162,9 +181,9 @@ function Dashboard() {
         <div className='add-data-popover' ref={popoverRef}>
           <div className='data-popover-center'>
             <div className='data-boxes' id='data-boxes-input'>
-              <input className='data-box-input' type='text' placeholder='Altitude' value={altitude} onChange={(e) => setAltitude(e.target.value)}/>
-              <input className='data-box-input' type='text' placeholder='HIS' value={hsi} onChange={(e) => setHsi(e.target.value)}/>
-              <input className='data-box-input' type='text' placeholder='ADI' value={adi} onChange={(e) => setAdi(e.target.value)}/>
+              <input className='data-box-input' type='text' placeholder='Altitude' value={altitude} onChange={(e) => handleValidInput(e,0,3000,setAltitude)}/>
+              <input className='data-box-input' type='text' placeholder='HIS' value={hsi} onChange={(e) => handleValidInput(e,0,360,setHsi)}/>
+              <input className='data-box-input' type='text' placeholder='ADI' value={adi} onChange={(e) => handleValidInput(e,0,100,setAdi)}/>
             </div>
             <button className='button' id='submit-button' onClick={() => handleClick('submit')}>SEND</button>
           </div>
