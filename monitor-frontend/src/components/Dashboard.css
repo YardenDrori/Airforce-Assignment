@@ -15,7 +15,7 @@
     color: white;
     background-color: rgb(72, 72, 72);
     padding: 0.25em 0.8em;
-    transition: transform 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
     border-color: black;
     border-width: 0.5EM;
     border-style:outset;
@@ -24,7 +24,7 @@
 .button:hover {
     color: rgb(146, 242, 255);
     transform: scale(1.1);
-    transition: transform 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .button:active {
     color: rgb(70, 206, 255);
@@ -48,73 +48,85 @@
 
 
 .data-boxes {
-    display:flex;
-    flex-direction: column;
-    gap: 2em;
+  width: fit-content;
+  background-color: transparent;
+  display:flex;
+  flex-direction: row;
+  gap: 2em;
+
 }
 
-.data-box-text {
-
-  padding: 1EM;
-  border-width: 0.2em;
+.data-box-input {
+  padding: 0.8EM;
+  border-width: 0.1em;
   border-color: rgb(25, 25, 25);
   border-style: solid;
-  background-color: rgb(72, 72, 72);
+  background-color: rgb(165, 165, 165);
   border-radius: 2EM;
 }
 
 
-.data-box-plus{
-  display: flex;
-  flex-direction: row;
-  width: 7.5em;
+#data-boxes-input{
+  position: relative;
+  align-self: center;
+  padding-right: 0em;
+  width: 16em;
   height: 3em;
   display: flex;
-  font-size: 16px;
-  color: #333;
-  background-color: rgb(202, 202, 202);
-  padding: 1EM;
-  margin: 0.1EM;  
-  border-color: black;
-  border-width: 0.2EM;
-  border-style:solid;
-  border-radius: 0.75em;
+  flex-direction: column;
+  gap: 1.5em;
 }
 
-.plus-popover {
+
+
+.add-data-popover {
   height: 12.5em;
   width: 25em;
   position: absolute;
-  top: 67.5%;
+  top: 66.67%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-
+  backdrop-filter: blur(30px);
   padding: 1em;
   border-radius: 3em;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   z-index: 999;
-  border: 1px solid rgba(255, 255, 255, 0.3); /* optional glass border */
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.arrow-button {
-  background-color: rgb(0, 200, 0);
-  padding: 1EM;
-  color: white;
+.data-popover-center {
+  position: relative;
+  height: 12.5em;
+  width: 25em;
+  display: flex;
+  flex-direction: column;
+}
+
+#submit-button {
   border: none;
-
-  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%, 0% 0%);
-  transition: transform 0.1s ease-in-out;
+  height: 3em;
+  width: 4em;
+  position: absolute;
+  top: 92.5%;
+  left: 92.5%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(0, 200, 0);
+  color: white;
+  clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+  transition: all 0.1s ease-in-out;
 }
 
-.arrow-button:hover {
+#submit-button:hover {
   background-color: rgb(0, 175, 0);
+  transition: all 0.1s ease-in-out;
+
 }
 
-.arrow-button:active {
+#submit-button:active {
     background-color: rgb(0, 141, 0);
+    transition: all 0.1s ease-in-out;
 }
 
 .visual-data {

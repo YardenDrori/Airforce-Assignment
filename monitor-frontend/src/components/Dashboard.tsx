@@ -70,6 +70,9 @@ function Dashboard() {
   } else if (buttonId === 'plus') {
     console.log('Button clicked: ', buttonId);
     setShowPopover(!showPopover);
+    } else if (buttonId === 'submit') {
+      console.log('Button clicked: ', buttonId);
+      setShowPopover(!showPopover);
     } else {
       console.log('ERROR: unknown buttonID');
     }
@@ -88,15 +91,15 @@ function Dashboard() {
         {content}
       </div>
       {showPopover && (
-        <div className="plus-popover">
-          <div className='data-boxes'>
-              <input className='data-box-plus' type='text' placeholder='Altitude' />
-              <input className='data-box-plus' type='text' placeholder='HIS' />
-              <input className='data-box-plus' type='text' placeholder='ADI' />
+        <div className='add-data-popover'>
+          <div className='data-popover-center'>
+            <div className='data-boxes' id='data-boxes-input'>
+                <input className='data-box-input' type='text' placeholder='Altitude' />
+                <input className='data-box-input' type='text' placeholder='HIS' />
+                <input className='data-box-input' type='text' placeholder='ADI' />
+            </div>
+            <button className='button' id='submit-button' onClick={() => handleClick('submit')}>SEND</button>
           </div>
-          <button className='arrow-button' id='submit-button' onClick={() => handleClick('submit')}>
-              SEND
-          </button>
         </div>
       )}
     </div>
