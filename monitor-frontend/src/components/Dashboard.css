@@ -1,18 +1,21 @@
 .main-body {
   align-items: center;
   justify-content: center;
+  min-width: 23em;
   display: grid;
   border-color: rgb(181, 181, 181);
   border-width: 0.1em;
   border-style: solid;
-  padding: 0.3em;
   background-color: #353535;
-  border-width: 0.1em;
   padding: 0.9em;
 }
 
+
+
 .button {
     color: white;
+    width: 6em;
+    text-align: center;
     background-color: rgb(72, 72, 72);
     padding: 0.25em 0.8em;
     transition: all 0.1s ease-in-out;
@@ -31,20 +34,29 @@
     border-style:groove
 }
 .primary-buttons {
-  align-items:center;
-  justify-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display:flex;
   gap:0.5em;
 }
-.buttons {
+.button-wrapper {
   position: relative;
-  justify-content: center;
   display: flex;
-  gap: 2em;
-  padding-bottom: 0.6em;
-  padding-top: 0.6em;
+  padding-bottom: 3em;
+  padding-top: 3em;
 }
 
+#plus-button {
+  position: absolute;
+  width: fit-content;
+  position: absolute;
+  margin-left: 10em;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
 .data-boxes {
@@ -53,7 +65,15 @@
   display:flex;
   flex-direction: row;
   gap: 2em;
+}
 
+.data-box-text {
+  background-color: #5b5b5b;
+  padding: 0.6em;
+  border-radius: 1em;
+  border-color: #5d5d5d;
+  border-style: solid;
+  border-width: 0.1em;
 }
 
 .data-box-input {
@@ -86,14 +106,13 @@
   top: 66.67%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(30px);
   padding: 1em;
   border-radius: 3em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   z-index: 999;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 0.05em solid rgba(255, 255, 255, 0.3);
 }
 
 .data-popover-center {
@@ -226,6 +245,7 @@
 }
 
 .degree-measurements{
+  transition: transform 0.3s ease-in-out;
   position: absolute;
   top: 50%;
   left: 50%;
