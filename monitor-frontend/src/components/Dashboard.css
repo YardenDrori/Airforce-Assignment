@@ -239,7 +239,7 @@
 }
 
 .arrow-indicater {
-  position: relative;
+  position: absolute;
   left: 2.2em; /* adjust so it lines up horizontally with the bar */
   top: 19.5em;
   scale: 3;
