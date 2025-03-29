@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost:27017/FlightData')
 .then(() => console.log('Connected to MongoDB\n'))
 .catch((err) => console.error('MongoDB connection error:\n', err));
 const app = express();
-const port = 3000;
+const port = 8080;
 
 const flightDataSchema = new mongoose.Schema({
     altitude: Number,

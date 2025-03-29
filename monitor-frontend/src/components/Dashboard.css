@@ -7,7 +7,8 @@
   border-width: 0.1em;
   border-style: solid;
   background-color: #353535;
-  padding: 0.9em;
+  border-radius: 1.5em;
+  padding: 1.5em;
 }
 
 
@@ -27,7 +28,7 @@
 .button:hover {
     color: rgb(146, 242, 255);
     transform: scale(1.1);
-    transition: all 0.1s ease-in-out;
+    transition: transform 0.1s ease-in-out;
 }
 .button:active {
     color: rgb(70, 206, 255);
@@ -53,6 +54,7 @@
   width: fit-content;
   position: absolute;
   margin-left: 10em;
+  color: yellow;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -109,7 +111,7 @@
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(30px);
   padding: 1em;
-  border-radius: 3em;
+  border-radius: 0.75em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   z-index: 999;
   border: 0.05em solid rgba(255, 255, 255, 0.3);
@@ -131,20 +133,20 @@
   top: 92.5%;
   left: 92.5%;
   transform: translate(-50%, -50%);
-  background-color: rgb(0, 200, 0);
+  background-color: rgb(0, 140, 0);
   color: white;
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
   transition: all 0.1s ease-in-out;
 }
 
 #submit-button:hover {
-  background-color: rgb(0, 175, 0);
+  background-color: rgb(0, 125, 0);
   transition: all 0.1s ease-in-out;
 
 }
 
 #submit-button:active {
-    background-color: rgb(0, 141, 0);
+    background-color: rgb(0, 100, 0);
     transition: all 0.1s ease-in-out;
 }
 
@@ -253,7 +255,7 @@
   display: flex;
 }
 
-.degree-measurenent {
+.degree-measurement {
   color: #000000;
   font-size: 1em;
   position: absolute;
