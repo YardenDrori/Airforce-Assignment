@@ -81,6 +81,8 @@
 }
 
 .data-box-input {
+  position: relative;
+  width: 15em;
   padding: 0.8em;
   border-width: 0.1em;
   border-color: rgb(25, 25, 25);
@@ -89,27 +91,58 @@
   border-radius: 2em;
 }
 
-
-#data-boxes-input{
+.input-box-wrapper {
   position: relative;
-  align-self: center;
-  padding-right: 0em;
-  width: 16em;
+}
+#data-boxes-input{
+  position: absolute;
+  width: fit-content;
   height: 3em;
   display: flex;
   flex-direction: column;
-  gap: 1.5em;
+  gap: 2em;
 }
 
 .input-max-text {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: 0em;
   font-size: 0.75em;
+  color: #000000;
 }
 
+.input-category {
+  min-width: 5em;
+  height: 90%;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 10%;
+  border-color: rgb(25, 25, 25);
+  background-color:rgb(72, 72, 72);
+  border-style: solid;
+  border-radius: 1em;
+  margin-right: 0.75em;
+}
 
+.input-boxes {
+  width: fit-content;
+  position: relative;
+  display: flex;
+}
+.input-wrapper-wrapper {
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
 
 .add-data-popover {
-  height: 14em;
+  height: 15.5em;
   width: 25em;
   position: absolute;
   top: 66.67%;
@@ -137,7 +170,7 @@
   height: 3em;
   width: 4em;
   position: absolute;
-  top: 92.5%;
+  top: 94.5%;
   left: 92.5%;
   transform: translate(-50%, -50%);
   background-color: rgb(0, 200, 0);
@@ -278,7 +311,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transform-origin: center center; /* 👈 this centers the rotation */
+  transform-origin: center center;
   text-align: center;
 }
 

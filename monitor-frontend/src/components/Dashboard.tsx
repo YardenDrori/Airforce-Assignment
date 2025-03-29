@@ -166,24 +166,22 @@ function Dashboard(): ReactElement {
       
         if (response.status ===200 || response.status === 201) {
           setShowInvalidInputMsg(false);
-          setShowPopover(false);
+          setShowPopover(false);//disable popover
+          //update visual data
+          setAltitudeVisual(Number(altitude));
+          setHSIVisual(Number(hsi));
+          setADIVisual(Number(adi));
+          //remove data from input boxes
+
         } else if (response.status === 400) {
           setShowInvalidInputMsg(true);
-        } else {
-          // Other errors
         }
       })
 
-      //update visual data
-      setAltitudeVisual(Number(altitude));
-      setHSIVisual(Number(hsi));
-      setADIVisual(Number(adi));
-      //remove data from input boxes
       setAltitude('');
       setHsi('');
       setAdi('');
       console.log('Button clicked: ', buttonId);
-      //disable popover
     } else {
       console.log('ERROR: unknown buttonID');
     }
@@ -207,17 +205,27 @@ function Dashboard(): ReactElement {
         <div className='add-data-popover' ref={popoverRef}>
           <div className='data-popover-center'>
             <div className='data-boxes' id='data-boxes-input'>
-              <div>
+              <div className='input-boxes'>
+                <label className='input-category'>ALTITUDE:</label>
+                <div className='input-box-wrapper'>
                 <input className='data-box-input' type='number' placeholder='Altitude' value={altitude} onChange={(e) => handleValidInput(e,min_altitude,max_altitude,setAltitude)}/>
                 <p className='input-max-text'>max: {max_altitude}</p>
+                </div>
               </div>
-              <div>
-                <input className='data-box-input' type='number' placeholder='HIS' value={hsi} onChange={(e) => handleValidInput(e,min_hsi,max_hsi,setHsi)}/>
-                <p className='input-max-text'>max: {max_hsi}</p>
+
+              <div className='input-boxes'>
+                <label className='input-category'>ADI:</label>
+                <div className='input-box-wrapper'>
+                  <input className='data-box-input' type='number' placeholder='HSI' value={hsi} onChange={(e) => handleValidInput(e,min_hsi,max_hsi,setHsi)}/>
+                  <p className='input-max-text'>max: {max_hsi}</p>
+                </div>
               </div>
-              <div>
-                <input className='data-box-input' type='number' placeholder='ADI' value={adi} onChange={(e) => handleValidInput(e,min_adi,max_adi,setAdi)}/>
-                <p className='input-max-text'>max: {max_adi}</p>
+              <div className='input-boxes'>
+                <label className='input-category'>ADI:</label>
+                <div className='input-box-wrapper'>
+                  <input className='data-box-input' type='number' placeholder='ADI' value={adi} onChange={(e) => handleValidInput(e,min_adi,max_adi,setAdi)}/>
+                  <p className='input-max-text'>max: {max_adi}</p>
+                </div>
               </div>
             </div>
             <button className='button' id='submit-button' onClick={() => handleButtonPress('submit')}>SEND</button>
