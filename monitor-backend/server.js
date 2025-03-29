@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 app.post('/api/data', async (req, res) => {
     try {
       const { altitude, hsi, adi } = req.body;
-  
+      console.log(`altitude: ${altitude} hsi (compass): ${hsi} adi (attitude indicator): ${adi}`);
       // Check all values exist
       if (altitude === undefined || hsi === undefined || adi === undefined) {
         console.log('Error detected code 400');

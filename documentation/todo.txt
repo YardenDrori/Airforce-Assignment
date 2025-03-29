@@ -1,14 +1,9 @@
 make scaling better
 make phone version
-add light mode
-add minecraft's inventory style animation to popover (maybe)
 github readme
 documentation
-comments
 add prev and next
 add categories to popover menu
 enter to submit button in popover menu
-make backend confirm results validity
-make plus button resize on hover
 fix arrow text
-add attitude indicator support for -100 to +100
+handle negative inputs in attitude indicator

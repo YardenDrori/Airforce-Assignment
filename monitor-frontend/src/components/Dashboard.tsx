@@ -1,32 +1,46 @@
 import React, { useState, ReactElement, useRef, useEffect, useCallback } from 'react';
 import './Dashboard.css';
-const max_altitude = 3000;
-const min_altitude = 0;
-const max_hsi = 360;
-const min_hsi = 0;
-const max_adi = 100;
-const min_adi = -100;
-const altitude_bar_visual_height = 30;
+const max_altitude = 3000; //max altitude value
+const min_altitude = 0; //minimum altitude value
+const max_hsi = 360; //max hsi (compass) value
+const min_hsi = 0; //min hsi (compass) value
+const max_adi = 100; //max adi (attidue indicator) value
+const min_adi = 0; //min adi (attitude indicator) value
+const altitude_bar_visual_height = 30; //visual height of the altitude bar in EM
+const circular_diagnostics_visual_radius = 10; //radius of compass and attitude indicator in EM
 
 function Dashboard(): ReactElement {
-  const [content, setContent] = useState<ReactElement | null>(null);
-  const [altitude_visual, setAltitudeVisual] = useState(0);
-  const [hsi_visual, setHSIVisual] = useState(0);
-  const [adi_visual, setADIVisual] = useState(50);
-  const [showPopover, setShowPopover] = useState(false);
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const [activeButton, setActiveButton] = useState('');
-  const [altitude, setAltitude] = useState('');
-  const [hsi, setHsi] = useState('');
-  const [adi, setAdi] = useState('');
+  const [content, setContent] = useState<ReactElement | null>(null); //dynamic content loading depending on selected button
+  const [altitude_visual, setAltitudeVisual] = useState(0); //the altitude shown in visual tab
+  const [hsi_visual, setHSIVisual] = useState(0); //the HSI value shown in visual tab
+  const [adi_visual, setADIVisual] = useState(50); //the ADI value shown in visual tab
+  const [showPopover, setShowPopover] = useState(false); //popover boolean
+  const popoverRef = useRef<HTMLDivElement>(null); //reference to the popover div
+  const [activeButton, setActiveButton] = useState(''); //last pressed button
+  const [altitude, setAltitude] = useState(''); //input text box value for altitude
+  const [hsi, setHsi] = useState(''); //input text box value for HSI
+  const [adi, setAdi] = useState(''); //input text box value for ADI
+  const [showInvalidInputMsg, setShowInvalidInputMsg] = useState(false); //whether an invalid input msg should be shown in the popover
   const data = {
-    altitude: Number(altitude),
-    hsi: Number(hsi),
-    adi: Number(adi),
-  };
+    altitude: altitude === '' ? undefined : Number(altitude),
+    hsi: hsi === '' ? undefined : Number(hsi),
+    adi: adi === '' ? undefined : Number(adi),
+  };//post schema
 
+  //object containing html for text tab
+  const renderText = useCallback(() => {
+    return (
+      <div className='data-boxes'>
+      <div className='data-box-text'>Altitude: {altitude_visual}</div>
+      <div className='data-box-text'>HSIf: {hsi_visual}</div>
+      <div className='data-box-text'>ADI: {adi_visual}</div>
+    </div>
+    )
+  }, [adi_visual, altitude_visual, hsi_visual]);
+
+  //object contaibing html for visual tab
   const renderVisual = useCallback(() => {
-    const skyOffset = (adi_visual/10)
+    const skyOffset = (adi_visual/100)*circular_diagnostics_visual_radius
     return (
       <div className='visual-data'>
           <div className='altitude-bar'>
@@ -43,11 +57,11 @@ function Dashboard(): ReactElement {
               </div>
             </div>
           </div>
-          <div className='compass'>
+          <div className='compass' style={{height:circular_diagnostics_visual_radius + 'em', width: circular_diagnostics_visual_radius + 'em'}}>
             <div className='circle'>
               <div className='circle-center'>
-              <div className='compass-stationary-needle'></div>
-              <div className='degree-measurement' style={{ transform: `rotate(-${hsi_visual}deg)` }}>
+              <div className='compass-stationary-needle' style={{height:circular_diagnostics_visual_radius*0.5 + 'em', width: circular_diagnostics_visual_radius*0.8 + 'em', bottom: circular_diagnostics_visual_radius*0.15 + 'em'}}></div>
+              <div className='degree-measurements' style={{ transform: `rotate(-${hsi_visual}deg)` }}>
                   <label className='degree-measurement' id='north' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>0</label>
                   <label className='degree-measurement' id='east' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>90</label>
                   <label className='degree-measurement' id='south' style={{transform: `translate(-50%, -50%) rotate(${hsi_visual}deg)`}}>180</label>
@@ -56,26 +70,30 @@ function Dashboard(): ReactElement {
               </div>
             </div>
           </div>
-          <div className='angle-indicator'>
+          <div className='angle-indicator' style={{height:circular_diagnostics_visual_radius + 'em', width: circular_diagnostics_visual_radius + 'em'}}>
             <div className='circle'>
-              <div className='angle-indicator-sky' style={{bottom: skyOffset + 'em'}}></div>
-              <div className='angle-indicator-ground'></div>
+              <div className='angle-indicator-sky'></div>
+              <div className='angle-indicator-ground' style={{top: skyOffset + 'em'}}></div>
             </div>
           </div>
         </div>
     )
   }, [adi_visual, altitude_visual, hsi_visual]);
 
+  //function updating info shown when data changes or a button was pressed
   useEffect(() => {
-    setContent(renderVisual);
-  }, [renderVisual]);
+    if (activeButton === 'visual'){
+      setContent(renderVisual);
+    }
+    if (activeButton === 'text'){
+      setContent(renderText);
+    }
+  }, [renderVisual, renderText, activeButton]);
 
+  //function that validates input box input
   function handleValidInput(e: React.ChangeEvent<HTMLInputElement>,min : number,max : number,setState: React.Dispatch<React.SetStateAction<string>>): void{
     const value = e.target.value;
-    
-    if (value === ""){
-      setState('')
-    }
+    setState('')
     if (!/^\d*$/.test(value)) {
       return;
     }
@@ -90,6 +108,7 @@ function Dashboard(): ReactElement {
       setState(String(max));
   }
 
+  //function that closes the popover if it detects a click outside the popover
   function handleClickOutside(event: MouseEvent): void {
     console.log('found mouse click');
     if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
@@ -97,6 +116,8 @@ function Dashboard(): ReactElement {
     }
   }
 
+  //function that adds / removes the event listener for button presses depending on if the
+  //popover is active or not
   useEffect(() => {
     if (showPopover) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -107,7 +128,8 @@ function Dashboard(): ReactElement {
     };
   }, [showPopover]);
 
-  function handleClick(buttonId: string): void {
+  //function that handles each of the tab buttons and send button
+  function handleButtonPress(buttonId: string): void {
     console.log('Button clicked: ', buttonId);
       
     if (buttonId === 'text') {
@@ -117,14 +139,7 @@ function Dashboard(): ReactElement {
         return;
       }
       setActiveButton('text');
-      setContent(
-      <div className='data-boxes'>
-        <div className='data-box-text'>Altitude: {altitude_visual}</div>
-        <div className='data-box-text'>HSIf: {hsi_visual}</div>
-        <div className='data-box-text'>ADI: {adi_visual}</div>
-      </div>
-    );
-
+      setContent(renderText);
     } else if (buttonId === 'visual') {
       if (activeButton === 'visual') {
         setActiveButton('');
@@ -137,25 +152,38 @@ function Dashboard(): ReactElement {
     } else if (buttonId === 'plus') {
       setShowPopover(!showPopover);
     } else if (buttonId === 'submit') {
+      //send info on json format to server
       fetch('http://localhost:8080/api/data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
+      //print server response
+      .then(async response => {
+        const result = await response.text();
+        console.log('Status code:', response.status);
+        console.log('Server response:', result);
+      
+        if (response.status ===200 || response.status === 201) {
+          setShowInvalidInputMsg(false);
+          setShowPopover(false);
+        } else if (response.status === 400) {
+          setShowInvalidInputMsg(true);
+        } else {
+          // Other errors
+        }
+      })
+
+      //update visual data
       setAltitudeVisual(Number(altitude));
       setHSIVisual(Number(hsi));
       setADIVisual(Number(adi));
-
-      if (activeButton === 'visual') {
-        setContent(renderVisual());
-      }
-
+      //remove data from input boxes
       setAltitude('');
       setHsi('');
       setAdi('');
       console.log('Button clicked: ', buttonId);
-      setShowPopover(!showPopover);
-
+      //disable popover
     } else {
       console.log('ERROR: unknown buttonID');
     }
@@ -165,11 +193,11 @@ function Dashboard(): ReactElement {
     <div className='main-body'>
       <div className='button-wrapper'>
         <div className='primary-buttons'>
-          <button className='button' onClick={() => handleClick('text')}>TEXT</button>
-          <button className='button' onClick={() => handleClick('visual')}>VISUAL</button>
+          <button className='button' onClick={() => handleButtonPress('text')}>TEXT</button>
+          <button className='button' onClick={() => handleButtonPress('visual')}>VISUAL</button>
         </div>
         {!showPopover && (
-          <button className='button' id='plus-button' onClick={() => handleClick('plus')}>+</button>
+          <button className='button' id='plus-button' onClick={() => handleButtonPress('plus')}>+</button>
         )}
       </div>
       <div className='content'>
@@ -179,12 +207,24 @@ function Dashboard(): ReactElement {
         <div className='add-data-popover' ref={popoverRef}>
           <div className='data-popover-center'>
             <div className='data-boxes' id='data-boxes-input'>
-              <input className='data-box-input' type='number' placeholder='Altitude' value={altitude} onChange={(e) => handleValidInput(e,min_altitude,max_altitude,setAltitude)}/>
-              <input className='data-box-input' type='number' placeholder='HIS' value={hsi} onChange={(e) => handleValidInput(e,min_hsi,max_hsi,setHsi)}/>
-              <input className='data-box-input' type='number' placeholder='ADI' value={adi} onChange={(e) => handleValidInput(e,min_adi,max_adi,setAdi)}/>
+              <div>
+                <input className='data-box-input' type='number' placeholder='Altitude' value={altitude} onChange={(e) => handleValidInput(e,min_altitude,max_altitude,setAltitude)}/>
+                <p className='input-max-text'>max: {max_altitude}</p>
+              </div>
+              <div>
+                <input className='data-box-input' type='number' placeholder='HIS' value={hsi} onChange={(e) => handleValidInput(e,min_hsi,max_hsi,setHsi)}/>
+                <p className='input-max-text'>max: {max_hsi}</p>
+              </div>
+              <div>
+                <input className='data-box-input' type='number' placeholder='ADI' value={adi} onChange={(e) => handleValidInput(e,min_adi,max_adi,setAdi)}/>
+                <p className='input-max-text'>max: {max_adi}</p>
+              </div>
             </div>
-            <button className='button' id='submit-button' onClick={() => handleClick('submit')}>SEND</button>
+            <button className='button' id='submit-button' onClick={() => handleButtonPress('submit')}>SEND</button>
           </div>
+          {showInvalidInputMsg && (
+            <p className='invalid-input-msg'>Invalid input, try again.</p>
+          )}
         </div>
       )}
     </div>

@@ -7,8 +7,7 @@
   border-width: 0.1em;
   border-style: solid;
   background-color: #353535;
-  border-radius: 1.5em;
-  padding: 1.5em;
+  padding: 0.9em;
 }
 
 
@@ -21,14 +20,14 @@
     padding: 0.25em 0.8em;
     transition: all 0.1s ease-in-out;
     border-color: black;
-    border-width: 0.5EM;
+    border-width: 0.5em;
     border-style:outset;
     border-radius: 0.75em;
 }
 .button:hover {
     color: rgb(146, 242, 255);
     transform: scale(1.1);
-    transition: transform 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .button:active {
     color: rgb(70, 206, 255);
@@ -54,10 +53,13 @@
   width: fit-content;
   position: absolute;
   margin-left: 10em;
-  color: yellow;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+#plus-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  transition: all 0.1s ease-in-out;
 }
 
 
@@ -79,12 +81,12 @@
 }
 
 .data-box-input {
-  padding: 0.8EM;
+  padding: 0.8em;
   border-width: 0.1em;
   border-color: rgb(25, 25, 25);
   border-style: solid;
   background-color: rgb(165, 165, 165);
-  border-radius: 2EM;
+  border-radius: 2em;
 }
 
 
@@ -99,10 +101,15 @@
   gap: 1.5em;
 }
 
+.input-max-text {
+  margin: 0em;
+  font-size: 0.75em;
+}
+
 
 
 .add-data-popover {
-  height: 12.5em;
+  height: 14em;
   width: 25em;
   position: absolute;
   top: 66.67%;
@@ -111,7 +118,7 @@
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(30px);
   padding: 1em;
-  border-radius: 0.75em;
+  border-radius: 3em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   z-index: 999;
   border: 0.05em solid rgba(255, 255, 255, 0.3);
@@ -119,8 +126,8 @@
 
 .data-popover-center {
   position: relative;
-  height: 12.5em;
-  width: 25em;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -133,21 +140,29 @@
   top: 92.5%;
   left: 92.5%;
   transform: translate(-50%, -50%);
-  background-color: rgb(0, 140, 0);
+  background-color: rgb(0, 200, 0);
   color: white;
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
   transition: all 0.1s ease-in-out;
 }
 
 #submit-button:hover {
-  background-color: rgb(0, 125, 0);
+  background-color: rgb(0, 175, 0);
   transition: all 0.1s ease-in-out;
 
 }
 
 #submit-button:active {
-    background-color: rgb(0, 100, 0);
+    background-color: rgb(0, 141, 0);
     transition: all 0.1s ease-in-out;
+}
+
+.invalid-input-msg {
+  position: absolute;
+  color:rgb(253, 56, 56);
+  top: 87.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .visual-data {
@@ -160,7 +175,7 @@
 
 .altitude-bar {
   position: relative;
-  width: 4EM;
+  width: 4em;
   height: 30rem;
 }
   
@@ -171,7 +186,7 @@
   width: 4em;
   height: 10em;
   background-color: #ffffff;
-  border-radius: 0.5EM;
+  border-radius: 0.5em;
   overflow: hidden;
 }
 
@@ -188,11 +203,11 @@
 
 .arrow-indicater {
   position: absolute;
-  left: 2.2EM; /* adjust so it lines up horizontally with the bar */
-  top: 19.5EM;
+  left: 2.2em; /* adjust so it lines up horizontally with the bar */
+  top: 19.5em;
   scale: 3;
   width: 3em;
-  height: 1EM;
+  height: 1em;
   background-color: rgb(255, 100, 100);
   clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
   transition: top 1s ease-in-out;
@@ -210,21 +225,21 @@
 }
 .measurement-indicator {
   color: rgb(255, 0, 0);
-  font-size: 1.3EM;
+  font-size: 1.3em;
   text-align: center;
 }
 
 .compass{
   position: relative;
-  width: 10EM;
-  height: 10EM;
+  width: 10em;
+  height: 10em;
 }
 
 .circle {
   display: grid;
   position: absolute;
-  width: 10em;
-  height: 10em;
+  width: inherit;
+  height: inherit;
   background-color: white;
   clip-path: circle(50% at 50% 50%);
   
@@ -240,7 +255,7 @@
   position: relative;
   width: 8em;
   height: 5em;
-  bottom: 1.5em;
+  bottom: 0.15em;
   transform: rotate(-90deg);
   background-color: rgb(100, 0, 0);
   clip-path: polygon(0 45%, 60% 45%, 60% 30%, 70% 50%, 60% 70%, 60% 55%, 0 55%);
@@ -256,7 +271,8 @@
 }
 
 .degree-measurement {
-  color: #000000;
+  transition: transform 1s ease-in-out;
+  color: black;
   font-size: 1em;
   position: absolute;
   top: 50%;
@@ -285,23 +301,22 @@
 
 .angle-indicator {
   position: relative;
-  width: 10EM;
-  height: 10EM;
+  width: 10em;
+  height: 10em;
 }
 
 .angle-indicator-sky {
   position: absolute;
-  width: 10em;
-  height: 10em;
-  bottom: 5em;
+  width: inherit;
+  height: inherit;
   background-color: rgb(0, 166, 255);
-  z-index: 1;
-  transition: all 1s ease-in-out;
 }
 .angle-indicator-ground {
   position: absolute;
-  width: 10em;
-  height: 10em;
+  width: inherit;
+  height: inherit;
   top: 0em;
   background-color: #00ff00;
+  transition: all 1s ease-in-out;
+  z-index: 1;
 }
