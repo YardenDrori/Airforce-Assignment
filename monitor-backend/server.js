@@ -11,6 +11,7 @@ const flightDataSchema = new mongoose.Schema({
     altitude: Number,
     hsi: Number,
     adi: Number,
+    timestamp: { type: Date, default: Date.now }
 });
   
 const FlightData = mongoose.model('FlightData', flightDataSchema);

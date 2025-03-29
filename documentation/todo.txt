@@ -1,6 +1,3 @@
-make scaling better ---
-make phone version
 documentation ---
-add prev and next
 enter to submit button in popover menu
 fix arrow text

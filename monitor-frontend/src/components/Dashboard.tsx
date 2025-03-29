@@ -8,6 +8,7 @@ const max_adi = 100; //max adi (attidue indicator) value
 const min_adi = 0; //min adi (attitude indicator) value
 const altitude_bar_visual_height = 30; //visual height of the altitude bar in EM
 const circular_diagnostics_visual_radius = 10; //radius of compass and attitude indicator in EM
+const mongoDBCon = 'http://localhost:8080/api/data';
 
 function Dashboard(): ReactElement {
   const [content, setContent] = useState<ReactElement | null>(null); //dynamic content loading depending on selected button
@@ -32,7 +33,7 @@ function Dashboard(): ReactElement {
     return (
       <div className='data-boxes'>
       <div className='data-box-text'>Altitude: {altitude_visual}</div>
-      <div className='data-box-text'>HSIf: {hsi_visual}</div>
+      <div className='data-box-text'>HSI: {hsi_visual}</div>
       <div className='data-box-text'>ADI: {adi_visual}</div>
     </div>
     )
@@ -154,7 +155,7 @@ function Dashboard(): ReactElement {
       setShowInvalidInputMsg(false);
     } else if (buttonId === 'submit') {
       //send info on json format to server
-      fetch('http://localhost:8080/api/data', {
+      fetch(mongoDBCon, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -182,7 +183,6 @@ function Dashboard(): ReactElement {
       setAltitude('');
       setHsi('');
       setAdi('');
-      console.log('Button clicked: ', buttonId);
     } else {
       console.log('ERROR: unknown buttonID');
     }
@@ -215,7 +215,7 @@ function Dashboard(): ReactElement {
               </div>
 
               <div className='input-boxes'>
-                <label className='input-category'>ADI:</label>
+                <label className='input-category'>HSI:</label>
                 <div className='input-box-wrapper'>
                   <input className='data-box-input' type='number' placeholder='HSI' value={hsi} onChange={(e) => handleValidInput(e,min_hsi,max_hsi,setHsi)}/>
                   <p className='input-max-text'>max: {max_hsi}</p>
