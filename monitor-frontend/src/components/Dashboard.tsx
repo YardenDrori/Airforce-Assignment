@@ -28,6 +28,22 @@ function Dashboard(): ReactElement {
     adi: adi === '' ? undefined : Number(adi),
   };//post schema
 
+
+
+  useEffect(() => {
+    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    if (!isChrome) {
+      alert('This site works best in Google Chrome. Some features may not display correctly.');
+    }
+  }, []);
+
+
+
+
+
+
+
+
   //object containing html for text tab
   const renderText = useCallback(() => {
     return (
