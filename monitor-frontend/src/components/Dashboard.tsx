@@ -44,7 +44,7 @@ function Dashboard(): ReactElement {
     return (
       <div className='visual-data'>
           <div className='altitude-bar'>
-            <div className='arrow-indicater' style={{ top: altitude_bar_visual_height-altitude_visual / max_altitude*altitude_bar_visual_height-1+ `rem`}}></div>
+            <div className='arrow-indicater' style={{ top: altitude_bar_visual_height-(altitude_visual / max_altitude*altitude_bar_visual_height)+1+ `rem`}}></div>
             <div className='vertical-bar' style={{ height: altitude_bar_visual_height + `rem` }}>
               <div
                 className='filled-bar-area'style={{height: (altitude_visual / max_altitude) * altitude_bar_visual_height + 'rem'}}
@@ -151,6 +151,7 @@ function Dashboard(): ReactElement {
 
     } else if (buttonId === 'plus') {
       setShowPopover(!showPopover);
+      setShowInvalidInputMsg(false);
     } else if (buttonId === 'submit') {
       //send info on json format to server
       fetch('http://localhost:8080/api/data', {

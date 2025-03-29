@@ -1,7 +1,6 @@
-make scaling better
+make scaling better ---
 make phone version
-documentation
+documentation ---
 add prev and next
 enter to submit button in popover menu
 fix arrow text
-handle negative inputs in attitude indicator

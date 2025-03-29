@@ -7,10 +7,14 @@
   border-width: 0.1em;
   border-style: solid;
   background-color: #353535;
-  padding: 0.9em;
+  padding: 1.75em;
+
 }
 
-
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .button {
     color: white;
@@ -202,7 +206,7 @@
   display: flex;
   position: relative;
   align-items: center;
-  /* transform-origin: center center; */
+  flex-wrap: inherit;
   gap: 3em;
 }
 
@@ -235,7 +239,7 @@
 }
 
 .arrow-indicater {
-  position: absolute;
+  position: relative;
   left: 2.2em; /* adjust so it lines up horizontally with the bar */
   top: 19.5em;
   scale: 3;
