@@ -56,7 +56,7 @@ The frontend runs on ```http://localhost:3000```
 1) node.js is required for the **npm** and **node** commands to work.
 2) mongodb should be installed and running **locally** at ```mongodb://localhost:27017/FlightData``` which is the default local host adress for mongodb.
 
-note: intended to run in chrome or chromium based web browsers
+note: intended to run in chrome
 
 ---
 ## 📸 Screenshots
